@@ -16,7 +16,7 @@ for i in range(0, 10):
     for j in range(0, 10):
         pic = 6 - pics[200*i + j]
         ax[i, j].imshow(pic, cmap='gray', vmin=0, vmax=6)
-#plt.show()
+plt.show()
 
 # split the data into a training and a testing dataset
 trainPatterns = np.zeros((1000, 240))
@@ -54,9 +54,6 @@ classificationHypothesesTrain = W @ featureValuesTrain;
 maxValues = np.max(classificationHypothesesTrain, axis=0);
 maxIndicesTrain = np.where(classificationHypothesesTrain == maxValues)
 nrOfMisclassificationsTrain = np.sum(correctLabels != maxIndicesTrain[0]);
-print(maxIndicesTrain[0])
-print(correctLabels)
-print(correctLabels != maxIndicesTrain[0])
 print("train misclassification rate = " + str(nrOfMisclassificationsTrain / 1000));
 
 # compute test misclassification rate
