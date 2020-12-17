@@ -65,7 +65,7 @@ test_dataset = test_dataset.batch(BATCH_SIZE)
 model = Sequential()
 
 # Convolve
-model.add(Conv2D(32, (3, 3), input_shape=(16, 15, 1)))
+model.add(Conv2D(64, (3, 3), input_shape=(16, 15, 1)))
 model.add(BatchNormalization(axis=-1))
 model.add(Activation('relu'))
 # model.add(MaxPooling2D(pool_size=(2,2)))
