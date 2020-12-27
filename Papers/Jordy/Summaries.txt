@@ -1,0 +1,3 @@
+Handwritten digit recognition based on corner detection and convolutional neural network.
+
+Not really a usefull paper. The corner recognition is not used for classifying the digits but for finding the digits in a larger sheet of paper. They use a big CNN with pictures of 224 by 224, so that's a no for us :(
