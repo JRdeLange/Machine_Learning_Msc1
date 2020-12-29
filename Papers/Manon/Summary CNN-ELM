@@ -1,0 +1,7 @@
+Summary: An Effective and Improved CNN-ELM Classifier for Handwritten Digits Recognition and Classification
+
+Deep NNs require vast volumes of data (which we don't necessarily have (but we can make/fake that!)) Apparently all CNN are deep NNs. 
+Their Feautre extraction has convolution layer - pooling layer - convolution layer - pooling layer, with kernel size = 4, max-pooling ratio = 2, stride = 2, padding = 0. 
+
+Their input images have size 28 * 28... idk if that is then applicable to use? nearly double our image size.
+They inverted their pictures colours? No explanation why that choice was made (it shouldn't matter?)
