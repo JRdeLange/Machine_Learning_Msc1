@@ -1,14 +1,18 @@
 Is what we thought the right idea of using a CNN on the dataset, as well as leading the reader through our process of the steps we took?
-- 
+- Yes. He said that it sounded like we knew what we were doing.
 
 How much of the inner workings of the CNN do we need to explain?
-- 
+- The report is meant to be an excercise, not a scientific paper. We should describe our specific architecture and the once we experimented with. It should make clear how much time has been invested into the exercise. Do not overexplain. He wants a clear description of our architecture and the path towards the final result. (He talks about cross validation here which is something to do with how long the training takes)
 
 Are there any glaring ommissions from our approach?
-- 
+- He seems to believe that we know what we are doing
 
 How much should we be citing the papers we've read considering we didn't get much out of them?
-- 
+- He's not expecting much in the way of literature review. Even if read papers were not directly applicable, mentioning them in the introduction section makes a nice impression. Being able to discriminate between useful and irrelevant papers is also a sign of understanding the material. TLDR it gives a nice impressiong but is in no way critical to the assignment.
 
 What layout does he want
-- 
+- Just make it look nice :)
+
+
+
+Also he's actually very cute in person
