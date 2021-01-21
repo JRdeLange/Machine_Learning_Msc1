@@ -1,0 +1,14 @@
+Is what we thought the right idea of using a CNN on the dataset, as well as leading the reader through our process of the steps we took?
+- 
+
+How much of the inner workings of the CNN do we need to explain?
+- 
+
+Are there any glaring ommissions from our approach?
+- 
+
+How much should we be citing the papers we've read considering we didn't get much out of them?
+- 
+
+What layout does he want
+- 
