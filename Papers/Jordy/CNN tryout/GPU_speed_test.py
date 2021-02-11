@@ -10,12 +10,18 @@ import matplotlib.pyplot as plt
 
 import tensorflow as tf
 
-amount_of_runs = 1
+print("-------------------------------")
+
+print(tf.config.list_physical_devices('GPU'))
+
+print(tf.test.is_built_with_cuda)
+print("-------------------------------")
 
 # Read in the data
+
 fifteen = 15
 sixteen = 16
-enlargeFactor = 2
+enlargeFactor = 8
 
 dataFile = open("digits.txt", "r")
 dataLines = dataFile.readlines()
@@ -32,6 +38,7 @@ for i in range(0, len(dataLines)):
             index += 1
 
 # Rearrange the data to 15x16 pictures
+
 dataArray = np.zeros([2000, sixteen * enlargeFactor, fifteen * enlargeFactor, 1])
 for x in range(0, 2000):
     for i in range(0, sixteen):
@@ -67,9 +74,14 @@ trainingLabelArray = np_utils.to_categorical(trainingLabelArray, 10)
 testLabelArray = np_utils.to_categorical(testLabelArray, 10)
 
 # Data augmentation
-if True:
+if False:
     data_augmentation = tf.keras.Sequential([
         tf.keras.layers.experimental.preprocessing.RandomRotation(factor=(-0.1, 0.1)),
+        # tf.keras.layers.experimental.preprocessing.RandomZoom(width_factor=(-0.2, 0.1), height_factor=(-0.2, 0.1),
+        #                                                      fill_mode="constant"),
+        #tf.keras.layers.experimental.preprocessing.RandomZoom(width_factor=(0, 0.1), height_factor=(0, 0.1),
+        #                                                      fill_mode="constant")
+    ])
 
     for j in range(0, 5):
         thing = np.zeros([1000, sixteen, fifteen, 1])
@@ -92,40 +104,82 @@ SHUFFLE_BUFFER_SIZE = 100
 train_dataset = train_dataset.shuffle(SHUFFLE_BUFFER_SIZE).batch(BATCH_SIZE)
 test_dataset = test_dataset.batch(BATCH_SIZE)
 
-for i in range(0, amount_of_runs):
+for i in range(0, 1):
     # Make the model!
     model = Sequential()
 
     # Convolve
-    model.add(Conv2D(16, (2, 2)))
+
+    
+    model.add(Conv2D(128, (2, 2)))
     model.add(Activation('relu'))
     model.add(BatchNormalization(axis=-1))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Conv2D(32, (2, 2)))
+    model.add(Conv2D(128, (2, 2)))
     model.add(Activation('relu'))
     model.add(BatchNormalization(axis=-1))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Conv2D(64, (2, 2)))
-    model.add(Activation('relu'))
+    '''
+
+    model.add(Conv2D(64, (2, 2), input_shape=(sixteen, fifteen, 1)))
     model.add(BatchNormalization(axis=-1))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(64, (2, 2), input_shape=(sixteen, fifteen, 1)))
+    model.add(BatchNormalization(axis=-1))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(64, (2, 2), input_shape=(sixteen, fifteen, 1)))
+    model.add(BatchNormalization(axis=-1))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    '''
+
 
     # Flatten
     model.add(Flatten())
+
+    model.add(Dense(1024))
+    model.add(Dense(1024))
+    model.add(Dense(1024))
 
     # The output layer
     model.add(Dense(10))
 
     model.add(Activation('softmax'))
 
+
     # Compile it
     model.compile(loss='categorical_crossentropy', optimizer=Adam(), metrics=['accuracy'])
 
     # Look at it
-    model.summary()
+    #model.summary()
 
+    #print(trainingDataArray.shape)
+
+    tempModel = model
     # Train it
-    model.fit(train_dataset, epochs=10, validation_data=test_dataset)
+    model.fit(train_dataset, epochs=25, validation_data=test_dataset)
+    print("-----------DONE-----------")
+    print("-----------DONE-----------")
     print("-----------DONE-----------")
 
-# Used tutorial:
+
+
 # https://yashk2810.github.io/Applying-Convolutional-Neural-Network-on-the-MNIST-dataset/
+
+
+'''
+# Data augmentation
+data_augmentation = tf.keras.Sequential([
+    tf.keras.layers.experimental.preprocessing.RandomRotation(0.2),
+    tf.keras.layers.experimental.preprocessing.RandomZoom(height_factor=(0, 0.2), width_factor=(0, 0.2))
+])
+
+print(len(train_dataset))
+
+train_dataset = train_dataset.map(lambda x, y: (data_augmentation(x, training=True), y), num_parallel_calls=AUTOTUNE)
+
+print(len(train_dataset))
+print("----------------------------")
+'''
